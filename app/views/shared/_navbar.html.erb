@@ -20,9 +20,18 @@
         <% if I18n.locale == :en %>
           <%= image_tag('en.png', alt: 'English', class: 'rounded-circle', style: 'width:24px; margin-left:16px; margin-bottom:-2px') %>
         <% elsif I18n.locale == :fr %>
-          <%= image_tag('fr.png', alt: 'French', class: 'rounded-circle', style: 'width:14px') %>
+          <%= image_tag('fr.png', alt: 'French', class: 'rounded-circle', style: 'width:24px; margin-left:16px; margin-bottom:-2px') %>
+        <% elsif I18n.locale == :il %>
+          <%= image_tag('il.png', alt: 'Hebrew', class: 'rounded-circle', style: 'width:24px; margin-left:16px; margin-bottom:-2px') %>
         <% end %>
-      </div>
+      
+        <%= form_with(model: current_user, url: user_path, local: true, method: :patch, id: 'languageForm') do |form| %>
+          <div class="">
+            <%= form.select :language, I18n.available_locales.map { |locale| [I18n.t("languages.#{locale}"), locale] }, {}, class: "form-select-nav", id: 'languageSelect' %>
+          </div>
+        <% end %>
+
+      </div>  
     <% end %>
   </div>
 </nav>
